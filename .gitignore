@@ -1,0 +1,5 @@
+data/
+__pycache__/
+*.pyc
+agent/agent_state.json
+agent/agent_updates.json
