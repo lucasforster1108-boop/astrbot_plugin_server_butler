@@ -1,0 +1,75 @@
+{
+  "admin_ids": {
+    "default": "",
+    "description": "管理员账号 ID（逗号分隔）",
+    "hint": "只有管理员能用 /重启容器；留空则该功能关闭",
+    "type": "string"
+  },
+  "agent_token": {
+    "default": "",
+    "description": "探针全局令牌",
+    "hint": "要和每台 VPS 上探针的 AGENT_TOKEN 一致；单台在 servers 里单独写 token 可覆盖",
+    "type": "string"
+  },
+  "cert_warn_days": {
+    "default": 15,
+    "description": "证书剩余多少天开始告警",
+    "type": "int"
+  },
+  "check_interval": {
+    "default": 300,
+    "description": "巡检间隔（秒）",
+    "hint": "多久巡检一轮，最小 60",
+    "type": "int"
+  },
+  "daily_report_time": {
+    "default": "",
+    "description": "日报时间（HH:MM）",
+    "hint": "如 08:30；留空 = 不发日报",
+    "type": "string"
+  },
+  "disk_threshold": {
+    "default": 85,
+    "description": "磁盘告警阈值（%）",
+    "type": "int"
+  },
+  "expiry_warn_days": {
+    "default": 15,
+    "description": "服务器提前多少天提醒到期",
+    "type": "int"
+  },
+  "servers": {
+    "default": "[]",
+    "description": "服务器清单（JSON 数组）",
+    "hint": "每台一对象：name 名称、agent 探针地址、token（可空）、expires 到期日（可空）、traffic_quota_gb 月流量配额 GB（可空）、watchdog 守护容器数组（可空）、yearly_fee 年费（可空）、currency 币种（可空，默认 USD）。例：[{\"name\":\"美国\",\"agent\":\"http://1.2.3.4:9876\",\"expires\":\"2027-10-03\",\"traffic_quota_gb\":1000,\"yearly_fee\":13.23,\"watchdog\":[\"alist\"]}]",
+    "type": "string"
+  },
+  "services": {
+    "default": "[]",
+    "description": "要探活的服务清单（JSON 数组）",
+    "hint": "每条 {\"name\":\"博客\",\"url\":\"https://blog.example.com\"}；挂了会告警，https 的还会顺带查证书",
+    "type": "string"
+  },
+  "traffic_threshold": {
+    "default": 90,
+    "description": "月流量告警阈值（%）",
+    "type": "int"
+  },
+  "ssh_fail_threshold": {
+    "description": "SSH 爆破告警阈值（10 分钟失败次数）",
+    "type": "int",
+    "default": 30,
+    "hint": "10 分钟内 SSH 登录失败超过这个数就告警"
+  },
+  "domains": {
+    "description": "域名清单（JSON 数组）",
+    "type": "string",
+    "default": "[]",
+    "hint": "每条 {\"domain\":\"example.com\",\"expires\":\"2027-01-01\"}，只用于 /到期 清单和提醒，自己填到期日"
+  },
+  "backup_warn_hours": {
+    "description": "备份太老告警阈值（小时）",
+    "type": "int",
+    "default": 48
+  }
+}
